@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wolf Launcher Pro - Unlimited Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --secondary: #0ea5e9;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --gold: #fbbf24;
+      --dark: #1e293b;
+      --darker: #0f172a;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --grass-light: #8bc34a;
+      --grass-dark: #558b2f;
+      --stone-light: #78909c;
+      --stone-dark: #455a64;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: var(--light);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+    }
+    
+    body.theme-grass {
+      background: linear-gradient(135deg, var(--grass-dark) 0%, var(--grass-light) 100%);
+    }
+    
+    body.theme-darkstone {
+      background: linear-gradient(135deg, var(--stone-dark) 0%, var(--stone-light) 100%);
+    }
+    
+    .retro-font {
+      font-family: 'Press Start 2P', monospace;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    
+    body.theme-grass .container {
+      background: rgba(85, 139, 47, 0.85);
+      border: 1px solid rgba(139, 195, 74, 0.3);
+    }
+    
+    body.theme-darkstone .container {
+      background: rgba(69, 90, 100, 0.85);
+      border: 1px solid rgba(120, 144, 156, 0.3);
+    }
+    
+    header {
+      background: linear-gradient(90deg, var(--darker) 0%, var(--dark) 100%);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    body.theme-grass header {
+      background: linear-gradient(90deg, var(--grass-dark) 0%, var(--grass-light) 100%);
+      border-bottom: 3px solid var(--grass-dark);
+    }
+    
+    body.theme-darkstone header {
+      background: linear-gradient(90deg, var(--stone-dark) 0%, var(--stone-light) 100%);
+      border-bottom: 3px solid var(--stone-dark);
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    }
+    
+    body.theme-grass h1 {
+      color: white;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    body.theme-darkstone h1 {
+      color: var(--light);
+      text-shadow: 0 0 10px rgba(200, 200, 200, 0.5);
+    }
+    
+    .subtitle {
+      color: var(--gray);
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .header-btn {
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+    
+    .header-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    
+    .theme-switcher {
+      background: var(--darker);
+      color: white;
+    }
+    
+    .tabs {
+      display: flex;
+      background: var(--darker);
+      border-bottom: 2px solid var(--primary);
+      flex-wrap: wrap;
+    }
+    
+    body.theme-grass .tabs {
+      background: var(--grass-dark);
+      border-bottom: 2px solid var(--grass-light);
+    }
+    
+    body.theme-darkstone .tabs {
+      background: var(--stone-dark);
+      border-bottom: 2px solid var(--stone-light);
+    }
+    
+    .tab {
+      flex: 1;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-right: 1px solid rgba(139, 92, 246, 0.2);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+      min-width: 120px;
+    }
+    
+    body.theme-grass .tab {
+      border-right: 1px solid rgba(139, 195, 74, 0.2);
+    }
+    
+    body.theme-darkstone .tab {
+      border-right: 1px solid rgba(120, 144, 156, 0.2);
+    }
+    
+    .tab:last-child {
+      border-right: none;
+    }
+    
+    .tab:hover {
+      background: rgba(139, 92, 246, 0.2);
+    }
+    
+    body.theme-grass .tab:hover {
+      background: rgba(139, 195, 74, 0.2);
+    }
+    
+    body.theme-darkstone .tab:hover {
+      background: rgba(120, 144, 156, 0.2);
+    }
+    
+    .tab.active {
+      background: rgba(139, 92, 246, 0.4);
+      color: white;
+    }
+    
+    body.theme-grass .tab.active {
+      background: rgba(139, 195, 74, 0.4);
+    }
+    
+    body.theme-darkstone .tab.active {
+      background: rgba(120, 144, 156, 0.4);
+    }
+    
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    body.theme-grass .tab.active::after {
+      background: var(--grass-light);
+    }
+    
+    body.theme-darkstone .tab.active::after {
+      background: var(--stone-light);
+    }
+    
+    .tab i {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 25px;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    body.theme-grass .section-title {
+      color: white;
+    }
+    
+    body.theme-darkstone .section-title {
+      color: var(--light);
+    }
+    
+    .section-title i {
+      font-size: 1.5rem;
+    }
+    
+    /* Clients Section */
+    .client-controls {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .category-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .category-tab {
+      padding: 8px 15px;
+      background: var(--darker);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    
+    .category-tab.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .search-container {
+      display: flex;
+      gap: 15px;
+      flex: 1;
+      max-width: 500px;
+    }
+    
+    #searchInput {
+      flex: 1;
+      padding: 12px 20px;
+      background: var(--darker);
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    body.theme-grass #searchInput {
+      background: var(--grass-dark);
+      border: 2px solid var(--grass-light);
+    }
+    
+    body.theme-darkstone #searchInput {
+      background: var(--stone-dark);
+      border: 2px solid var(--stone-light);
+    }
+    
+    #searchInput:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+    }
+    
+    .client-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .client-card {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    body.theme-grass .client-card {
+      background: linear-gradient(145deg, var(--grass-dark) 0%, rgba(85, 139, 47, 0.8) 100%);
+      border: 1px solid rgba(139, 195, 74, 0.3);
+    }
+    
+    body.theme-darkstone .client-card {
+      background: linear-gradient(145deg, var(--stone-dark) 0%, rgba(69, 90, 100, 0.8) 100%);
+      border: 1px solid rgba(120, 144, 156, 0.3);
+    }
+    
+    .client-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+      border-color: var(--primary);
+    }
+    
+    body.theme-grass .client-card:hover {
+      box-shadow: 0 8px 25px rgba(139, 195, 74, 0.4);
+      border-color: var(--grass-light);
+    }
+    
+    body.theme-darkstone .client-card:hover {
+      box-shadow: 0 8px 25px rgba(120, 144, 156, 0.4);
+      border-color: var(--stone-light);
+    }
+    
+    .client-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .client-icon {
+      font-size: 2rem;
+      margin-right: 15px;
+      color: var(--primary);
+    }
+    
+    body.theme-grass .client-icon {
+      color: white;
+    }
+    
+    body.theme-darkstone .client-icon {
+      color: var(--light);
+    }
+    
+    .client-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    
+    .client-version {
+      background: var(--primary);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+    
+    body.theme-grass .client-version {
+      background: white;
+      color: var(--grass-dark);
+    }
+    
+    body.theme-darkstone .client-version {
+      background: var(--stone-light);
+      color: var(--darker);
+    }
+    
+    .version-latest {
+      background: var(--gold) !important;
+      color: var(--darker) !important;
+      animation: pulse 2s infinite;
+    }
+    
+    .client-features {
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+    
+    .feature-tag {
+      display: inline-block;
+      background: rgba(14, 165, 233, 0.2);
+      color: var(--secondary);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin: 0 5px 5px 0;
+    }
+    
+    .client-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .pin-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+    }
+    
+    .pin-btn.pinned {
+      color: var(--gold);
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.95rem;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      flex: 1;
+    }
+    
+    body.theme-grass .btn-primary {
+      background: white;
+      color: var(--grass-dark);
+    }
+    
+    body.theme-darkstone .btn-primary {
+      background: var(--stone-light);
+      color: var(--darker);
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    body.theme-grass .btn-primary:hover {
+      background: #f0f0f0;
+    }
+    
+    body.theme-darkstone .btn-primary:hover {
+      background: #8c9ba5;
+    }
+    
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+    }
+    
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.3);
+    }
+    
+    .btn-warning {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+    
+    .btn-warning:hover {
+      background: rgba(245, 158, 11, 0.3);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    /* Upload Section */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gray);
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      background: var(--darker);
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+    }
+    
+    body.theme-grass .form-control {
+      background: var(--grass-dark);
+      border: 2px solid var(--grass-light);
+    }
+    
+    body.theme-darkstone .form-control {
+      background: var(--stone-dark);
+      border: 2px solid var(--stone-light);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+    }
+    
+    .password-container {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    /* Servers Section */
+    .server-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .server-card {
+      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    body.theme-grass .server-card {
+      background: linear-gradient(145deg, var(--grass-dark) 0%, rgba(85, 139, 47, 0.8) 100%);
+      border: 1px solid rgba(139, 195, 74, 0.3);
+    }
+    
+    body.theme-darkstone .server-card {
+      background: linear-gradient(145deg, var(--stone-dark) 0%, rgba(69, 90, 100, 0.8) 100%);
+      border: 1px solid rgba(120, 144, 156, 0.3);
+    }
+    
+    .server-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+      border-color: var(--secondary);
+    }
+    
+    .server-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .server-icon {
+      font-size: 1.8rem;
+      margin-right: 15px;
+      color: var(--secondary);
+    }
+    
+    .server-address {
+      font-size: 1.1rem;
+      font-weight: 500;
+      word-break: break-all;
+    }
+    
+    .server-status {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+    
+    .status-online {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+    
+    .status-offline {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--danger);
+    }
+    
+    .btn-server {
+      width: 100%;
+      margin-top: 15px;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--gray);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+    }
+    
+    /* Launch Screen */
+    #launchScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    
+    #launchScreen.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .launch-logo {
+      font-size: 5rem;
+      color: var(--primary);
+      margin-bottom: 30px;
+      animation: pulse 2s infinite;
+    }
+    
+    .progress-container {
+      width: 80%;
+      max-width: 500px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    .launch-text {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      text-align: center;
+      color: white;
+    }
+    
+    /* Storage Indicator */
+    .storage-info {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    
+    .storage-bar {
+      height: 10px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    
+    .storage-progress {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.5s ease;
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes pulseBorder {
+      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    .pulse-border {
+      animation: pulseBorder 2s infinite;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .tabs {
+        flex-direction: column;
+      }
+      
+      .client-list, .server-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons, .password-container, .client-controls {
+        flex-direction: column;
+      }
+      
+      .search-container {
+        max-width: 100%;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body class="theme-darkstone">
+  <!-- Launch Screen -->
+  <div id="launchScreen">
+    <div class="launch-logo">
+      <i class="fas fa-paw"></i>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="launch-text" id="launchText">Initializing Wolf Launcher...</div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1 class="retro-font">WOLF LAUNCHER PRO</h1>
+        <p class="subtitle">Unlimited Edition - Secure Client Management</p>
+        
+        <div class="header-actions">
+          <button class="header-btn theme-switcher" id="themeSwitcher">
+            <i class="fas fa-palette"></i> Theme: Darkstone
+          </button>
+          <button class="header-btn" id="quickLaunchBtn">
+            <i class="fas fa-bolt"></i> Quick Launch
+          </button>
+          <button class="header-btn" id="musicToggle">
+            <i class="fas fa-music"></i> Music: Off
+          </button>
+          <button class="header-btn" id="exportBtn">
+            <i class="fas fa-file-export"></i> Export
+          </button>
+          <button class="header-btn" id="importBtn">
+            <i class="fas fa-file-import"></i> Import
+          </button>
+        </div>
+      </div>
+    </header>
+    
+    <div class="tabs">
+      <div class="tab active" data-tab="clients">
+        <i class="fas fa-box"></i> Clients
+      </div>
+      <div class="tab" data-tab="upload">
+        <i class="fas fa-upload"></i> Upload
+      </div>
+      <div class="tab" data-tab="servers">
+        <i class="fas fa-server"></i> Servers
+      </div>
+    </div>
+    
+    <div id="clients" class="tab-content active">
+      <h2 class="section-title"><i class="fas fa-box-open"></i> Uploaded Clients</h2>
+      
+      <div class="storage-info">
+        <div>Storage: <span id="storageStatus">Calculating...</span></div>
+        <div class="storage-bar">
+          <div class="storage-progress" id="storageProgress"></div>
+        </div>
+      </div>
+      
+      <div class="client-controls">
+        <div class="category-tabs">
+          <div class="category-tab active" data-category="all">All</div>
+          <div class="category-tab" data-category="pvp">PvP</div>
+          <div class="category-tab" data-category="vanilla">Vanilla</div>
+          <div class="category-tab" data-category="modded">Modded</div>
+          <div class="category-tab" data-category="utility">Utility</div>
+        </div>
+        
+        <div class="search-container">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search clients...">
+          <button id="searchBtn" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="client-list" id="clientList">
+        <!-- Client cards will be inserted here -->
+      </div>
+      
+      <div class="action-buttons">
+        <button id="clearAllBtn" class="btn btn-danger">
+          <i class="fas fa-trash-alt"></i> Reset All Clients
+        </button>
+        <button id="deleteOldBtn" class="btn btn-warning">
+          <i class="fas fa-broom"></i> Delete Old Versions
+        </button>
+      </div>
+    </div>
+    
+    <div id="upload" class="tab-content">
+      <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> Admin Upload</h2>
+      
+      <div class="password-container">
+        <input type="password" id="adminPass" class="form-control" placeholder="Enter admin password...">
+        <button id="loginBtn" class="btn btn-primary">
+          <i class="fas fa-lock"></i> Login
+        </button>
+      </div>
+      
+      <div id="uploadForm" style="display:none">
+        <div class="form-group">
+          <label for="clientName">Client Name</label>
+          <input type="text" id="clientName" class="form-control" placeholder="Enter client name">
+        </div>
+        
+        <div class="form-group">
+          <label for="version">Version</label>
+          <input type="text" id="version" class="form-control" placeholder="Enter version number">
+        </div>
+        
+        <div class="form-group">
+          <label for="clientCategory">Category</label>
+          <select id="clientCategory" class="form-control">
+            <option value="pvp">PvP</option>
+            <option value="vanilla">Vanilla</option>
+            <option value="modded">Modded</option>
+            <option value="utility">Utility</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="clientFile">Client File (.html)</label>
+          <input type="file" id="clientFile" class="form-control" accept=".html">
+        </div>
+        
+        <div class="form-group">
+          <label for="features">Features (comma separated)</label>
+          <input type="text" id="features" class="form-control" placeholder="e.g., Hacks, X-Ray, Fly">
+        </div>
+        
+        <button id="uploadBtn" class="btn btn-primary">
+          <i class="fas fa-upload"></i> Upload Client
+        </button>
+      </div>
+    </div>
+    
+    <div id="servers" class="tab-content">
+      <h2 class="section-title"><i class="fas fa-globe"></i> Server List</h2>
+      
+      <div class="server-list">
+        <div class="server-card">
+          <div class="server-header">
+            <div class="server-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <div>
+              <div class="server-address">wss://mc.asspixel.net</div>
+              <span class="server-status status-online">Online <i class="fas fa-check-circle"></i></span>
+            </div>
+          </div>
+          <p>Main survival server with economy and minigames</p>
+          <button class="btn btn-primary btn-server">
+            <i class="fas fa-play"></i> Connect
+          </button>
+        </div>
+        
+        <div class="server-card">
+          <div class="server-header">
+            <div class="server-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <div>
+              <div class="server-address">wss://vanillacraftsmp.com</div>
+              <span class="server-status status-online">Online <i class="fas fa-check-circle"></i></span>
+            </div>
+          </div>
+          <p>Vanilla survival with community projects</p>
+          <button class="btn btn-primary btn-server">
+            <i class="fas fa-play"></i> Connect
+          </button>
+        </div>
+        
+        <div class="server-card">
+          <div class="server-header">
+            <div class="server-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <div>
+              <div class="server-address">wss://eaglerx.bounce.moe</div>
+              <span class="server-status status-online">Online <i class="fas fa-check-circle"></i></span>
+            </div>
+          </div>
+          <p>Creative server with custom mods</p>
+          <button class="btn btn-primary btn-server">
+            <i class="fas fa-play"></i> Connect
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>Wolf Launcher Pro v3.0 &copy; 2023 | Unlimited Storage Edition</p>
+    </footer>
+  </div>
+
+  <audio id="backgroundMusic" loop>
+    <source src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-667.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Initialize the launcher
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Show launch animation
+      const launchScreen = document.getElementById('launchScreen');
+      const progressBar = document.getElementById('progressBar');
+      const launchText = document.getElementById('launchText');
+      
+      launchScreen.classList.add('active');
+      
+      // Simulate loading progress
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 5;
+        progressBar.style.width = `${progress}%`;
+        
+        if (progress === 20) launchText.textContent = "Loading client database...";
+        if (progress === 50) launchText.textContent = "Initializing modules...";
+        if (progress === 80) launchText.textContent = "Finalizing setup...";
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            launchScreen.classList.remove('active');
+          }, 500);
+        }
+      }, 100);
+      
+      // Initialize database and load data
+      await initDatabase();
+      await renderClients();
+      updateStorageInfo();
+    });
+    
+    // Database setup
+    const DB_NAME = 'WolfLauncherDB';
+    const DB_VERSION = 1;
+    const STORE_NAME = 'clients';
+    
+    let db = null;
+    
+    async function initDatabase() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        
+        request.onerror = (event) => {
+          console.error('Database error:', event.target.error);
+          reject(event.target.error);
+        };
+        
+        request.onsuccess = (event) => {
+          db = event.target.result;
+          console.log('Database initialized');
+          resolve();
+        };
+        
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          
+          // Create object store if it doesn't exist
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            const store = db.createObjectStore(STORE_NAME, { 
+              keyPath: 'id',
+              autoIncrement: true 
+            });
+            
+            // Create indexes for searching
+            store.createIndex('name', 'name', { unique: false });
+            store.createIndex('version', 'version', { unique: false });
+            store.createIndex('category', 'category', { unique: false });
+            store.createIndex('pinned', 'pinned', { unique: false });
+            store.createIndex('timestamp', 'timestamp', { unique: false });
+          }
+        };
+      });
+    }
+    
+    // Database operations
+    async function getAllClients() {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([STORE_NAME], 'readonly');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.getAll();
+        
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+    
+    async function addClient(client) {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.add(client);
+        
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+    
+    async function deleteClient(id) {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.delete(id);
+        
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+      });
+    }
+    
+    async function clearAllClients() {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.clear();
+        
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+      });
+    }
+    
+    async function updateClient(client) {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const store = transaction.objectStore(STORE_NAME);
+        const request = store.put(client);
+        
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+      });
+    }
+    
+    // Storage information
+    async function updateStorageInfo() {
+      try {
+        if (!navigator.storage || !navigator.storage.estimate) {
+          document.getElementById('storageStatus').textContent = 'Storage API not supported';
+          return;
+        }
+        
+        const estimate = await navigator.storage.estimate();
+        const usedMB = (estimate.usage / (1024 * 1024)).toFixed(2);
+        const quotaMB = (estimate.quota / (1024 * 1024)).toFixed(2);
+        const percentage = (estimate.usage / estimate.quota * 100).toFixed(1);
+        
+        document.getElementById('storageStatus').textContent = 
+          `Using ${usedMB}MB of ${quotaMB}MB (${percentage}%)`;
+        
+        document.getElementById('storageProgress').style.width = `${percentage}%`;
+      } catch (error) {
+        console.error('Error getting storage estimate:', error);
+        document.getElementById('storageStatus').textContent = 'Error loading storage info';
+      }
+    }
+    
+    // Theme management
+    const themeSwitcher = document.getElementById('themeSwitcher');
+    const body = document.body;
+    const themes = ['theme-darkstone', 'theme-grass'];
+    let currentThemeIndex = 0;
+    
+    themeSwitcher.addEventListener('click', () => {
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      const newTheme = themes[currentThemeIndex];
+      
+      // Remove all theme classes
+      themes.forEach(theme => body.classList.remove(theme));
+      
+      // Add the new theme
+      body.classList.add(newTheme);
+      
+      // Update button text
+      const themeNames = {
+        'theme-darkstone': 'Darkstone',
+        'theme-grass': 'Classic Grass'
+      };
+      themeSwitcher.innerHTML = `<i class="fas fa-palette"></i> Theme: ${themeNames[newTheme]}`;
+    });
+    
+    // DOM Elements
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const clientList = document.getElementById('clientList');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const deleteOldBtn = document.getElementById('deleteOldBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadForm = document.getElementById('uploadForm');
+    const adminPass = document.getElementById('adminPass');
+    const quickLaunchBtn = document.getElementById('quickLaunchBtn');
+    const musicToggle = document.getElementById('musicToggle');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const exportBtn = document.getElementById('exportBtn');
+    const importBtn = document.getElementById('importBtn');
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    
+    // Tab Switching
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        
+        // Update active tab
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show active content
+        tabContents.forEach(content => content.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+    
+    // Category Tabs
+    categoryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const category = tab.getAttribute('data-category');
+        
+        // Update active category tab
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Render clients with category filter
+        renderClients(category);
+      });
+    });
+    
+    // Render clients
+    async function renderClients(category = 'all') {
+      clientList.innerHTML = '<div class="loading">Loading clients...</div>';
+      
+      try {
+        const clients = await getAllClients();
+        
+        if (clients.length === 0) {
+          clientList.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+              <i class="fas fa-inbox fa-3x" style="margin-bottom: 20px;"></i>
+              <h3>No clients found</h3>
+              <p>Upload a client to get started</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Sort clients - pinned first, then by timestamp
+        const sortedClients = [...clients].sort((a, b) => {
+          if (a.pinned && !b.pinned) return -1;
+          if (!a.pinned && b.pinned) return 1;
+          return b.timestamp - a.timestamp;
+        });
+        
+        // Filter by category if needed
+        const filteredClients = category === 'all' 
+          ? sortedClients 
+          : sortedClients.filter(client => client.category === category);
+        
+        if (filteredClients.length === 0) {
+          clientList.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+              <i class="fas fa-search fa-3x" style="margin-bottom: 20px;"></i>
+              <h3>No clients in this category</h3>
+              <p>Try another category or upload a client</p>
+            </div>
+          `;
+          return;
+        }
+        
+        // Find the latest versions for each client
+        const latestVersions = {};
+        clients.forEach(client => {
+          if (!latestVersions[client.name] || 
+              parseFloat(client.version) > parseFloat(latestVersions[client.name])) {
+            latestVersions[client.name] = client.version;
+          }
+        });
+        
+        clientList.innerHTML = '';
+        
+        filteredClients.forEach((client, index) => {
+          const isLatest = client.version === latestVersions[client.name];
+          
+          const clientCard = document.createElement('div');
+          clientCard.className = 'client-card';
+          clientCard.innerHTML = `
+            <button class="pin-btn ${client.pinned ? 'pinned' : ''}" data-id="${client.id}">
+              <i class="fas fa-thumbtack"></i>
+            </button>
+            
+            <div class="client-header">
+              <div class="client-icon">
+                <i class="fas ${client.icon}"></i>
+              </div>
+              <div>
+                <span class="client-title">${client.name}</span>
+                <span class="client-version ${isLatest ? 'version-latest' : ''}">v${client.version}</span>
+              </div>
+            </div>
+            
+            <div class="client-features">
+              ${client.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+            
+            <div class="client-actions">
+              <button class="btn btn-primary launch-btn" data-id="${client.id}">
+                <i class="fas fa-rocket"></i> Launch
+              </button>
+              <button class="btn btn-danger delete-btn" data-id="${client.id}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          `;
+          
+          clientList.appendChild(clientCard);
+        });
+        
+        // Add event listeners to buttons
+        document.querySelectorAll('.launch-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const clients = await getAllClients();
+            const client = clients.find(c => c.id === id);
+            if (client) {
+              launchClient(client);
+            }
+          });
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const clients = await getAllClients();
+            const client = clients.find(c => c.id === id);
+            
+            if (client && confirm(`Are you sure you want to delete ${client.name}?`)) {
+              await deleteClient(id);
+              await renderClients();
+              updateStorageInfo();
+            }
+          });
+        });
+        
+        document.querySelectorAll('.pin-btn').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const clients = await getAllClients();
+            const client = clients.find(c => c.id === id);
+            
+            if (client) {
+              client.pinned = !client.pinned;
+              await updateClient(client);
+              await renderClients();
+            }
+            e.stopPropagation();
+          });
+        });
+      } catch (error) {
+        console.error('Error rendering clients:', error);
+        clientList.innerHTML = '<div class="error">Error loading clients. Please try again.</div>';
+      }
+    }
+    
+    // Launch client securely in about:blank
+    function launchClient(client) {
+      const launchScreen = document.getElementById('launchScreen');
+      const progressBar = document.getElementById('progressBar');
+      const launchText = document.getElementById('launchText');
+      
+      launchScreen.classList.add('active');
+      progressBar.style.width = '0%';
+      launchText.textContent = `Launching ${client.name} v${client.version}...`;
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 10) + 5;
+        if (progress > 100) progress = 100;
+        progressBar.style.width = `${progress}%`;
+        
+        if (progress === 30) launchText.textContent = "Loading game assets...";
+        if (progress === 60) launchText.textContent = "Initializing game modules...";
+        if (progress === 90) launchText.textContent = "Finalizing launch sequence...";
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            launchScreen.classList.remove('active');
+            
+            // Create a new window with about:blank
+            const newWindow = window.open('about:blank', '_blank');
+            
+            // Write the client content to the new window
+            newWindow.document.write(client.content);
+            newWindow.document.close();
+          }, 800);
+        }
+      }, 300);
+    }
+    
+    // Quick launch most recent client
+    quickLaunchBtn.addEventListener('click', async () => {
+      try {
+        const clients = await getAllClients();
+        
+        if (clients.length === 0) {
+          alert("No clients available to launch!");
+          return;
+        }
+        
+        // Find the most recent client
+        let mostRecent = clients[0];
+        clients.forEach(client => {
+          if (client.timestamp > mostRecent.timestamp) {
+            mostRecent = client;
+          }
+        });
+        
+        launchClient(mostRecent);
+      } catch (error) {
+        console.error('Error during quick launch:', error);
+        alert('Failed to launch client. Please try again.');
+      }
+    });
+    
+    // Admin login
+    loginBtn.addEventListener('click', () => {
+      if (adminPass.value === 'MKwerewolf2011') {
+        uploadForm.style.display = 'block';
+        adminPass.value = '';
+      } else {
+        alert('Incorrect password!');
+      }
+    });
+    
+    // Upload client
+    uploadBtn.addEventListener('click', async () => {
+      const name = document.getElementById('clientName').value;
+      const version = document.getElementById('version').value;
+      const category = document.getElementById('clientCategory').value;
+      const fileInput = document.getElementById('clientFile');
+      const features = document.getElementById('features').value;
+      
+      if (!name || !version || !fileInput.files.length || !features) {
+        alert('Please fill all fields and select a file!');
+        return;
+      }
+      
+      const file = fileInput.files[0];
+      
+      // Read the file content
+      const reader = new FileReader();
+      
+      reader.onload = async (event) => {
+        const content = event.target.result;
+        const icon = getIconByFileName(file.name);
+        
+        const newClient = {
+          name,
+          version,
+          category,
+          features: features.split(',').map(f => f.trim()),
+          icon,
+          timestamp: Date.now(),
+          pinned: false,
+          content
+        };
+        
+        try {
+          await addClient(newClient);
+          
+          // Reset form
+          document.getElementById('clientName').value = '';
+          document.getElementById('version').value = '';
+          document.getElementById('clientFile').value = '';
+          document.getElementById('features').value = '';
+          
+          alert(`${name} v${version} uploaded successfully!`);
+          await renderClients();
+          updateStorageInfo();
+          
+          // Switch to clients tab
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+          document.querySelector('.tab[data-tab="clients"]').classList.add('active');
+          document.getElementById('clients').classList.add('active');
+        } catch (error) {
+          console.error('Error adding client:', error);
+          alert('Failed to upload client. Please try again.');
+        }
+      };
+      
+      reader.onerror = () => {
+        alert('Error reading file. Please try again.');
+      };
+      
+      reader.readAsText(file);
+    });
+    
+    // Get icon based on file name
+    function getIconByFileName(filename) {
+      if (filename.includes('hack')) return 'fa-bug';
+      if (filename.includes('opti')) return 'fa-tachometer-alt';
+      if (filename.includes('minimap')) return 'fa-map';
+      if (filename.includes('texture')) return 'fa-palette';
+      return 'fa-cube';
+    }
+    
+    // Music toggle
+    let musicPlaying = false;
+    musicToggle.addEventListener('click', () => {
+      musicPlaying = !musicPlaying;
+      
+      if (musicPlaying) {
+        backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
+        musicToggle.innerHTML = '<i class="fas fa-music"></i> Music: On';
+      } else {
+        backgroundMusic.pause();
+        musicToggle.innerHTML = '<i class="fas fa-music"></i> Music: Off';
+      }
+    });
+    
+    // Export client list
+    exportBtn.addEventListener('click', async () => {
+      try {
+        const clients = await getAllClients();
+        const dataStr = JSON.stringify(clients, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const exportFileDefaultName = 'wolf_launcher_clients.json';
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        
+        alert('Client list exported successfully!');
+      } catch (error) {
+        console.error('Error exporting clients:', error);
+        alert('Failed to export client list. Please try again.');
+      }
+    });
+    
+    // Import client list
+    importBtn.addEventListener('click', () => {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.json';
+      
+      fileInput.onchange = async (e) => { 
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = async (event) => {
+          try {
+            const importedClients = JSON.parse(event.target.result);
+            
+            // Add all imported clients
+            for (const client of importedClients) {
+              await addClient(client);
+            }
+            
+            await renderClients();
+            updateStorageInfo();
+            alert('Client list imported successfully!');
+          } catch (error) {
+            console.error('Error importing client list:', error);
+            alert('Error importing client list: Invalid format or data');
+          }
+        };
+        
+        reader.onerror = () => {
+          alert('Error reading file. Please try again.');
+        };
+        
+        reader.readAsText(file);
+      };
+      
+      fileInput.click();
+    });
+    
+    // Clear all clients
+    clearAllBtn.addEventListener('click', async () => {
+      if (confirm("Are you sure you want to delete ALL clients?")) {
+        try {
+          await clearAllClients();
+          await renderClients();
+          updateStorageInfo();
+          alert('All clients have been deleted!');
+        } catch (error) {
+          console.error('Error clearing clients:', error);
+          alert('Failed to delete all clients. Please try again.');
+        }
+      }
+    });
+    
+    // Delete old versions
+    deleteOldBtn.addEventListener('click', async () => {
+      try {
+        const clients = await getAllClients();
+        
+        if (clients.length === 0) {
+          alert('No clients to clean up!');
+          return;
+        }
+        
+        // Group clients by name
+        const clientGroups = {};
+        clients.forEach(client => {
+          if (!clientGroups[client.name]) {
+            clientGroups[client.name] = [];
+          }
+          clientGroups[client.name].push(client);
+        });
+        
+        // Keep only the latest version for each client
+        const newClients = [];
+        Object.values(clientGroups).forEach(group => {
+          const latest = group.reduce((prev, current) => 
+            (parseFloat(prev.version) > parseFloat(current.version)) ? prev : current
+          );
+          newClients.push(latest);
+        });
+        
+        // Clear existing clients
+        await clearAllClients();
+        
+        // Add back only the latest versions
+        for (const client of newClients) {
+          await addClient(client);
+        }
+        
+        await renderClients();
+        updateStorageInfo();
+        alert('Old client versions have been deleted!');
+      } catch (error) {
+        console.error('Error deleting old versions:', error);
+        alert('Failed to delete old versions. Please try again.');
+      }
+    });
+    
+    // Search clients
+    async function searchClients() {
+      const searchTerm = searchInput.value.toLowerCase();
+      
+      if (!searchTerm) {
+        await renderClients();
+        return;
+      }
+      
+      try {
+        const allClients = await getAllClients();
+        const filteredClients = allClients.filter(client => 
+          client.name.toLowerCase().includes(searchTerm) ||
+          client.version.toLowerCase().includes(searchTerm) ||
+          client.features.some(feature => feature.toLowerCase().includes(searchTerm))
+        );
+        
+        // Temporarily display filtered clients
+        if (filteredClients.length === 0) {
+          clientList.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+              <i class="fas fa-search fa-3x" style="margin-bottom: 20px;"></i>
+              <h3>No matching clients found</h3>
+              <p>Try a different search term</p>
+            </div>
+          `;
+          return;
+        }
+        
+        clientList.innerHTML = '';
+        
+        filteredClients.forEach(client => {
+          const isLatest = true; // For simplicity in search results
+          
+          const clientCard = document.createElement('div');
+          clientCard.className = 'client-card';
+          clientCard.innerHTML = `
+            <button class="pin-btn ${client.pinned ? 'pinned' : ''}" data-id="${client.id}">
+              <i class="fas fa-thumbtack"></i>
+            </button>
+            
+            <div class="client-header">
+              <div class="client-icon">
+                <i class="fas ${client.icon}"></i>
+              </div>
+              <div>
+                <span class="client-title">${client.name}</span>
+                <span class="client-version ${isLatest ? 'version-latest' : ''}">v${client.version}</span>
+              </div>
+            </div>
+            
+            <div class="client-features">
+              ${client.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+            
+            <div class="client-actions">
+              <button class="btn btn-primary launch-btn" data-id="${client.id}">
+                <i class="fas fa-rocket"></i> Launch
+              </button>
+              <button class="btn btn-danger delete-btn" data-id="${client.id}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          `;
+          
+          clientList.appendChild(clientCard);
+        });
+        
+        // Add event listeners to buttons
+        document.querySelectorAll('.launch-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const clients = await getAllClients();
+            const client = clients.find(c => c.id === id);
+            if (client) {
+              launchClient(client);
+            }
+          });
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const clients = await getAllClients();
+            const client = clients.find(c => c.id === id);
+            
+            if (client && confirm(`Are you sure you want to delete ${client.name}?`)) {
+              await deleteClient(id);
+              await renderClients();
+              updateStorageInfo();
+            }
+          });
+        });
+        
+        document.querySelectorAll('.pin-btn').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const clients = await getAllClients();
+            const client = clients.find(c => c.id === id);
+            
+            if (client) {
+              client.pinned = !client.pinned;
+              await updateClient(client);
+              await renderClients();
+            }
+            e.stopPropagation();
+          });
+        });
+      } catch (error) {
+        console.error('Error searching clients:', error);
+      }
+    }
+    
+    searchInput.addEventListener('input', searchClients);
+    searchBtn.addEventListener('click', searchClients);
+  </script>
+</body>
+</html>
